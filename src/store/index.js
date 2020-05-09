@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import MoviesService from '@/services/MoviesService'
-import { SET_SEARCH_RESULTS, SET_SEARCH_TERM, SET_SEARCH_CURRENT_PAGE, SET_MOVIE_DETAILS, SET_RESULT_ERROR, SET_RESULT_TOTAL, ADD_FAVORITE, REMOVE_FAVORITE } from './mutation-types'
-import { GET_MOVIE_INFO, SEARCH_MOVIES_BY_TERM, SEARCH_MOVIES_BY_PAGE } from './actions-types'
+import FavoritesService from '@/services/FavoritesService'
+
+import { SET_SEARCH_RESULTS, SET_SEARCH_TERM, SET_SEARCH_CURRENT_PAGE, SET_MOVIE_DETAILS, SET_RESULT_ERROR, SET_RESULT_TOTAL, SET_FAVORITES_MOVIES } from './mutation-types'
+import { GET_MOVIE_INFO, SEARCH_MOVIES_BY_TERM, SEARCH_MOVIES_BY_PAGE, GET_FAVORITES_MOVIES, ADD_FAVORITE_MOVIE, REMOVE_FAVORITE_MOVIE } from './actions-types'
 
 Vue.use(Vuex)
 
@@ -35,14 +37,8 @@ export default new Vuex.Store({
     [SET_RESULT_TOTAL] (state, total) {
       state.total = total
     },
-    [ADD_FAVORITE] (state, fav) {
-      state.favorites.push(fav)
-    },
-    [REMOVE_FAVORITE] (state, fav) {
-      const idx = state.favorites.indexOf(fav)
-      if (idx > -1) {
-        state.favorites.splice(idx, 1)
-      }
+    [SET_FAVORITES_MOVIES] (state, favorites) {
+      state.favorites = favorites
     }
   },
   actions: {
@@ -77,7 +73,49 @@ export default new Vuex.Store({
       } catch (error) {
         context.commit(SET_RESULT_ERROR, error.response.data.message)
       }
+    },
+    async [GET_FAVORITES_MOVIES] (context) {
+      try {
+        FavoritesService.getFavoritesMovies()
+          .then((querySnapshot) => {
+            const favorites = []
+            querySnapshot.forEach((doc) => {
+              favorites.push({ id: doc.id, ...doc.data() })
+            })
+            context.commit(SET_FAVORITES_MOVIES, favorites)
+          })
+      } catch (error) {
+        context.commit(SET_RESULT_ERROR, error.response.data.message)
+      }
+    },
+    async [ADD_FAVORITE_MOVIE] (context, payload) {
+      try {
+        FavoritesService.addFavoritesMovies(payload)
+          .then(() => {
+            console.log('Document successfully written!')
+          })
+          .catch((error) => {
+            console.error('Error writing document: ', error)
+          })
+      } catch (error) {
+        context.commit(SET_RESULT_ERROR, error.response.data.message)
+      }
+    },
+    async [REMOVE_FAVORITE_MOVIE] (context, movieId) {
+      try {
+        FavoritesService.removeFavoritesMovies(movieId)
+          .then(() => {
+            console.log('Document successfully deleted!')
+            context.dispatch(GET_FAVORITES_MOVIES)
+          })
+          .catch((error) => {
+            console.error('Error removing document: ', error)
+          })
+      } catch (error) {
+        console.log(error)
+      }
     }
+
   },
   modules: {
   }

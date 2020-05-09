@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { REMOVE_FAVORITE_MOVIE } from '@/store/actions-types'
+
 export default {
   name: 'Favorite',
   props: ['movieData'],
@@ -37,7 +39,7 @@ export default {
         cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
-        this.$store.commit('removeFavorite', this.movie)
+        this.$store.dispatch(REMOVE_FAVORITE_MOVIE, this.movie.id)
         this.$message({
           duration: 1500,
           showClose: true,

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { ADD_FAVORITE_MOVIE } from '@/store/actions-types'
 
 export default {
   name: 'Movie',
@@ -49,7 +50,8 @@ export default {
         return
       }
 
-      this.$store.commit('addFavorite', movie)
+      this.$store.dispatch(ADD_FAVORITE_MOVIE, movie)
+
       this.$message({
         duration: 1500,
         showClose: true,

@@ -36,6 +36,7 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import Favorite from '@/components/Favorite.vue'
+import { GET_FAVORITES_MOVIES } from '@/store/actions-types'
 
 export default {
   name: 'Favorites',
@@ -52,6 +53,9 @@ export default {
     goBack () {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     }
+  },
+  mounted () {
+    this.$store.dispatch(GET_FAVORITES_MOVIES)
   }
 
 }
