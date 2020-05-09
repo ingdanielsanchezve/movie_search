@@ -1,0 +1,25 @@
+import firebase from 'firebase'
+import 'firebase/firestore'
+
+// firebase init goes here
+const config = {
+  apiKey: 'XXXXXXXXXXXXXXXXX,
+  authDomain: 'XXXXXXXXXXXXXXXXX,
+  databaseURL: 'XXXXXXXXXXXXXXXXX,
+  projectId: 'XXXXXXXXXXXXXXXXX,
+  storageBucket: 'XXXXXXXXXXXXXXXXX,
+  messagingSenderId: 'XXXXXXXXXXXXXXXXX,
+  appId: 'XXXXXXXXXXXXXXXXX'
+}
+firebase.initializeApp(config)
+
+// firebase utils
+const db = firebase.firestore()
+
+// firebase collections
+const favoritesCollection = db.collection('favorites')
+
+export {
+  db,
+  favoritesCollection
+}

@@ -67,6 +67,7 @@ export default {
 
   img{
     max-height: 300px;
+    width: auto;
   }
 
   .poster{
