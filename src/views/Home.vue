@@ -8,6 +8,7 @@
         <h4>
           Movies Data Search
         </h4>
+
         <el-row>
           <el-col>
             <el-input placeholder="Please type to Search a Movie or TV show" v-model="term" @change="getMovies">
@@ -21,6 +22,7 @@
           <el-pagination
             v-if="total > 0"
             :pager-count="15"
+            :current-page="currentPage"
             hide-on-single-page
             layout="total, prev, pager, next"
             @current-change="queryCurrentPage"
@@ -30,7 +32,7 @@
 
         <el-row :gutter="20">
           <el-col :xs="24" :sm="8" :md="6" :lg="4" :xl="3"
-                  v-for="movie in movies" :key="movie.imdbID">
+                  v-for="(movie, index) in movies" :key="`${movie.imdbID}${index}`">
             <Movie :movieData="movie"></Movie>
           </el-col>
           <el-alert
@@ -44,6 +46,7 @@
           <el-pagination
             v-if="total > 0"
             :pager-count="15"
+            :current-page="currentPage"
             hide-on-single-page
             layout="total, prev, pager, next"
             @current-change="queryCurrentPage"
@@ -62,7 +65,7 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import Movie from '@/components/Movie.vue'
-import MoviesService from '@/services/MoviesService'
+import { SEARCH_MOVIES_BY_TERM, SEARCH_MOVIES_BY_PAGE } from '@/store/actions-types'
 
 export default {
   name: 'Home',
@@ -72,43 +75,29 @@ export default {
   },
   data () {
     return {
-      term: this.$store.state.searchTerm,
-      error: ''
+      term: this.$store.state.searchTerm
     }
   },
   computed: {
     total () {
       return this.$store.state.total
     },
+    error () {
+      return this.$store.state.error
+    },
     movies () {
       return this.$store.state.searchResult
+    },
+    currentPage () {
+      return this.$store.state.currentPage
     }
   },
   methods: {
-    async getMovies () {
-      try {
-        this.$store.commit('setSearchTerm', this.term)
-        const response = await MoviesService.getMovies({ term: this.term })
-        this.$store.commit('setSearchResults', response.data.Search)
-        this.$store.commit('setResultTotal', parseInt(response.data.totalResults))
-
-        this.error = ('Error' in response.data) ? response.data.Error : ''
-      } catch (error) {
-        this.error = error.response.data.message
-      }
+    getMovies () {
+      this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: this.term })
     },
-    async queryCurrentPage (val) {
-      try {
-        this.$store.commit('setSearchTerm', this.term)
-
-        const response = await MoviesService.getMoviesByPage({ term: this.term, page: val })
-        this.$store.commit('setSearchResults', response.data.Search)
-        this.$store.commit('setResultTotal', parseInt(response.data.totalResults))
-
-        this.error = ('Error' in response.data) ? response.data.Error : ''
-      } catch (error) {
-        this.error = error.response.data.message
-      }
+    queryCurrentPage (page) {
+      this.$store.dispatch(SEARCH_MOVIES_BY_PAGE, { term: this.term, page: page })
     }
   }
 }

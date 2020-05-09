@@ -98,7 +98,7 @@
 <script>
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
-import MoviesService from '@/services/MoviesService'
+import { GET_MOVIE_INFO } from '@/store/actions-types'
 
 export default {
   name: 'MovieDetail',
@@ -107,21 +107,20 @@ export default {
   },
   data () {
     return {
-      movieId: this.$route.params.id,
-      movieDetails: '',
-      rating: 0
+      movieId: this.$route.params.id
     }
   },
   computed: {
     favorites () {
       return this.$store.state.favorites
+    },
+    movieDetails () {
+      return this.$store.state.movieDetails
     }
   },
   methods: {
     async getMovieDetails () {
-      const response = await MoviesService.getMoviesById({ movieId: this.movieId })
-      this.movieDetails = response.data
-      this.rating = parseFloat(this.movieDetails.imdbRating)
+      this.$store.dispatch(GET_MOVIE_INFO, { movieId: this.movieId })
     },
     addToFavorites (movie) {
       const exist = this.favorites.some(el => el.imdbID === movie.imdbID)
