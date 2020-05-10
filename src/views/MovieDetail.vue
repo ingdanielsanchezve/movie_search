@@ -160,9 +160,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .logo{
-    width: 200px;
-  }
+
   .el-row {
     margin-bottom: 20px;
   }
