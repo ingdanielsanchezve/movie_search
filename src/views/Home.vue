@@ -16,6 +16,15 @@
               <el-button type="danger" plain slot="append" @click="getMovies">Search</el-button>
             </el-input>
           </el-col>
+
+          <el-col>
+            <el-alert
+              v-if="error"
+              :title="error"
+              type="error">
+            </el-alert>
+          </el-col>
+
         </el-row>
         <el-row v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
           <el-row>
@@ -35,11 +44,7 @@
                     v-for="(movie, index) in movies" :key="`${movie.imdbID}${index}`">
               <Movie :movieData="movie"></Movie>
             </el-col>
-            <el-alert
-              v-if="error"
-              :title="error"
-              type="error">
-            </el-alert>
+
           </el-row>
 
           <el-row>
@@ -110,6 +115,9 @@ export default {
 <style lang="scss">
   .el-row {
     margin-bottom: 20px;
+  }
+  .el-alert{
+    margin-top: 20px;
   }
   .el-pagination__total{
     color: white;

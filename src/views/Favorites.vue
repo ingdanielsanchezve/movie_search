@@ -2,17 +2,31 @@
     <el-container direction="vertical" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
       <Header></Header>
       <el-main>
-          <h4>
-            This is your Favorites Movies Collection
-          </h4>
 
-          <h5 v-if="favorites.length >0">
-            You have {{favorites.length}} movies in your personal collection
-          </h5>
+          <el-row>
 
-          <h5 v-else>
-            Your Movies Collection is empty, it's a good time to add your preferred movies.
-          </h5>
+            <el-col v-if="error">
+              <el-alert
+                :title="error"
+                type="error">
+              </el-alert>
+            </el-col>
+
+            <el-col v-else>
+              <h4>
+                This is your Favorites Movies Collection
+              </h4>
+
+              <h5 v-if="favorites.length >0">
+                You have {{favorites.length}} movies in your personal collection
+              </h5>
+
+              <h5 v-else>
+                Your Movies Collection is empty, it's a good time to add your preferred movies.
+              </h5>
+            </el-col>
+
+          </el-row>
 
           <el-row :gutter="20">
             <el-col :xs="24" :sm="8" :md="6" :lg="4" :xl="3"
@@ -47,6 +61,9 @@ export default {
   computed: {
     favorites () {
       return this.$store.state.favorites
+    },
+    error () {
+      return this.$store.state.error
     },
     loading () {
       return this.$store.state.loading

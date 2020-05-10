@@ -53,7 +53,7 @@ export default new Vuex.Store({
         context.commit(SET_MOVIE_DETAILS, response.data)
         context.commit(SET_LOADING_STATUS, false)
       } catch (error) {
-        context.commit(SET_RESULT_ERROR, error.response.data.message)
+        context.commit(SET_RESULT_ERROR, error)
       }
     },
     async [SEARCH_MOVIES_BY_TERM] (context, payload) {
@@ -66,7 +66,7 @@ export default new Vuex.Store({
         context.commit(SET_RESULT_ERROR, ('Error' in response.data) ? response.data.Error : '')
         context.commit(SET_LOADING_STATUS, false)
       } catch (error) {
-        context.commit(SET_RESULT_ERROR, error.response.data.message)
+        context.commit(SET_RESULT_ERROR, error)
       }
     },
     async [SEARCH_MOVIES_BY_PAGE] (context, payload) {
@@ -80,7 +80,7 @@ export default new Vuex.Store({
         context.commit(SET_RESULT_ERROR, ('Error' in response.data) ? response.data.Error : '')
         context.commit(SET_LOADING_STATUS, false)
       } catch (error) {
-        context.commit(SET_RESULT_ERROR, error.response.data.message)
+        context.commit(SET_RESULT_ERROR, error)
       }
     },
     async [GET_FAVORITES_MOVIES] (context) {
@@ -95,35 +95,35 @@ export default new Vuex.Store({
             context.commit(SET_FAVORITES_MOVIES, favorites)
             context.commit(SET_LOADING_STATUS, false)
           })
+          .catch((error) => {
+            context.commit(SET_RESULT_ERROR, error)
+          })
       } catch (error) {
-        context.commit(SET_RESULT_ERROR, error.response.data.message)
+        context.commit(SET_RESULT_ERROR, error)
       }
     },
     async [ADD_FAVORITE_MOVIE] (context, payload) {
       try {
         FavoritesService.addFavoritesMovies(payload)
-          .then(() => {
-            console.log('Document successfully written!')
-          })
+          .then(() => {})
           .catch((error) => {
-            console.error('Error writing document: ', error)
+            context.commit(SET_RESULT_ERROR, error)
           })
       } catch (error) {
-        context.commit(SET_RESULT_ERROR, error.response.data.message)
+        context.commit(SET_RESULT_ERROR, error)
       }
     },
     async [REMOVE_FAVORITE_MOVIE] (context, movieId) {
       try {
         FavoritesService.removeFavoritesMovies(movieId)
           .then(() => {
-            console.log('Document successfully deleted!')
             context.dispatch(GET_FAVORITES_MOVIES)
           })
           .catch((error) => {
-            console.error('Error removing document: ', error)
+            context.commit(SET_RESULT_ERROR, error)
           })
       } catch (error) {
-        console.log(error)
+        context.commit(SET_RESULT_ERROR, error)
       }
     }
 
