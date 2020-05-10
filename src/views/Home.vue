@@ -124,6 +124,9 @@ export default {
       const searchTerm = this.term.trim()
       if (searchTerm.length > 0) {
         this.$store.dispatch(SEARCH_MOVIES_BY_PAGE, { term: searchTerm, page: page })
+      } else {
+        const searchTerm = this.$store.state.searchTerm
+        this.$store.dispatch(SEARCH_MOVIES_BY_PAGE, { term: searchTerm, page: page })
       }
     }
   }
