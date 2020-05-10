@@ -4,7 +4,7 @@ import MoviesService from '@/services/MoviesService'
 import FavoritesService from '@/services/FavoritesService'
 
 import { SET_SEARCH_RESULTS, SET_SEARCH_TERM, SET_SEARCH_CURRENT_PAGE, SET_MOVIE_DETAILS, SET_RESULT_ERROR, SET_RESULT_TOTAL, SET_FAVORITES_MOVIES, SET_LOADING_STATUS } from './mutation-types'
-import { GET_MOVIE_INFO, SEARCH_MOVIES_BY_TERM, SEARCH_MOVIES_BY_PAGE, GET_FAVORITES_MOVIES, ADD_FAVORITE_MOVIE, REMOVE_FAVORITE_MOVIE } from './actions-types'
+import { GET_MOVIE_INFO, SEARCH_MOVIES_BY_TERM, SEARCH_MOVIES_BY_PAGE, GET_FAVORITES_MOVIES, ADD_FAVORITE_MOVIE, REMOVE_FAVORITE_MOVIE, CLEAR_ALL } from './actions-types'
 
 Vue.use(Vuex)
 
@@ -15,8 +15,8 @@ export default new Vuex.Store({
     searchTerm: '',
     total: 0,
     error: '',
-    movieDetails: {},
     currentPage: 1,
+    movieDetails: {},
     loading: false
   },
   mutations: {
@@ -46,6 +46,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    [CLEAR_ALL] (context) {
+      context.commit(SET_SEARCH_CURRENT_PAGE, 1)
+      context.commit(SET_SEARCH_RESULTS, [])
+      context.commit(SET_SEARCH_TERM, '')
+      context.commit(SET_RESULT_ERROR, '')
+      context.commit(SET_RESULT_TOTAL, 0)
+    },
     async [GET_MOVIE_INFO] (context, payload) {
       try {
         context.commit(SET_LOADING_STATUS, true)
@@ -58,6 +65,7 @@ export default new Vuex.Store({
     },
     async [SEARCH_MOVIES_BY_TERM] (context, payload) {
       try {
+        context.dispatch(CLEAR_ALL)
         context.commit(SET_LOADING_STATUS, true)
         context.commit(SET_SEARCH_TERM, payload.term)
         const response = await MoviesService.getMovies({ term: payload.term })
