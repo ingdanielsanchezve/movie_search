@@ -6,8 +6,9 @@
         <el-row v-if="typeof movieDetails.Error !== 'undefined'">
           <el-col :xs="{span: 16, offset: 4}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
             <el-alert
-              :title="`It looks like something went wrong: ${movieDetails.Error}`"
-              type="error">
+              title="Are you sure this is the movie you are looking for? Please check the IMDb ID you have entered"
+              type="info"
+              show-icon>
             </el-alert>
           </el-col>
         </el-row>
