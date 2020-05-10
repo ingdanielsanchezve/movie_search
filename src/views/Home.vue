@@ -115,12 +115,16 @@ export default {
   },
   methods: {
     getMovies () {
-      if (this.term.length > 0) {
-        this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: this.term.trim() })
+      const searchTerm = this.term.trim()
+      if (searchTerm.length > 0) {
+        this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: searchTerm })
       }
     },
     queryCurrentPage (page) {
-      this.$store.dispatch(SEARCH_MOVIES_BY_PAGE, { term: this.term, page: page })
+      const searchTerm = this.term.trim()
+      if (searchTerm.length > 0) {
+        this.$store.dispatch(SEARCH_MOVIES_BY_PAGE, { term: searchTerm, page: page })
+      }
     }
   }
 }
