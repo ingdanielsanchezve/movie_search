@@ -10,14 +10,14 @@
         </h4>
 
         <el-row>
-          <el-col>
+          <el-col :xs="{span: 24}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
             <el-input placeholder="Please type to Search a Movie or TV show" v-model="term" @change="getMovies">
               <i slot="prefix" class="el-input__icon el-icon-search"></i>
               <el-button type="danger" plain slot="append" @click="getMovies">Search</el-button>
             </el-input>
           </el-col>
 
-          <el-col>
+          <el-col :xs="{span: 24}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
             <el-alert
               v-if="error"
               :title="error"

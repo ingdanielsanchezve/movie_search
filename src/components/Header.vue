@@ -1,7 +1,7 @@
 <template>
-  <el-header class="logo">
+  <el-header>
       <router-link to="/">
-        <img class="logo" src="../assets/logo.png">
+        <img src="../assets/logo.png">
       </router-link>
   </el-header>
 </template>

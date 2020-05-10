@@ -3,7 +3,16 @@
       <Header></Header>
       <el-main>
 
-        <el-row>
+        <el-row v-if="typeof movieDetails.Error !== 'undefined'">
+          <el-col :xs="{span: 16, offset: 4}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
+            <el-alert
+              :title="`It looks like something went wrong: ${movieDetails.Error}`"
+              type="error">
+            </el-alert>
+          </el-col>
+        </el-row>
+
+        <el-row v-else>
           <el-col :xs="{span: 16, offset: 4}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
             <h3 class="text-danger">
               {{movieDetails.Title}}
@@ -12,9 +21,7 @@
               {{movieDetails.Plot}}
             </h6>
           </el-col>
-        </el-row>
 
-        <el-row>
           <el-col :xs="{span: 8, offset: 8}" :sm="{span: 8, offset: 8}" :md="{span: 8, offset: 8}" :lg="{span: 4, offset: 4}" :xl="{span: 4, offset: 4}">
             <div class="card mb-4 shadow-sm">
               <el-image :src="(typeof movieDetails.Poster !== 'undefined') ? movieDetails.Poster : ''">
