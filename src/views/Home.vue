@@ -28,18 +28,26 @@
         </el-row>
         <el-row v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
           <el-row>
-            <el-pagination
-              v-if="total > 0"
-              :pager-count="15"
-              :current-page="currentPage"
-              hide-on-single-page
-              layout="total, prev, pager, next"
-              @current-change="queryCurrentPage"
-              :total="total">
-            </el-pagination>
+            <el-col>
+
+              <h5 v-if="total > 0">
+                Total results {{total}}
+              </h5>
+
+              <el-pagination
+                v-if="total > 0"
+                :pager-count="6"
+                :current-page="currentPage"
+                hide-on-single-page
+                layout="prev, pager, next"
+                @current-change="queryCurrentPage"
+                :total="total">
+              </el-pagination>
+            </el-col>
           </el-row>
 
           <el-row :gutter="20">
+
             <el-col :xs="24" :sm="8" :md="6" :lg="4" :xl="3"
                     v-for="(movie, index) in movies" :key="`${movie.imdbID}${index}`">
               <Movie :movieData="movie"></Movie>
@@ -48,15 +56,17 @@
           </el-row>
 
           <el-row>
-            <el-pagination
-              v-if="total > 0"
-              :pager-count="15"
-              :current-page="currentPage"
-              hide-on-single-page
-              layout="total, prev, pager, next"
-              @current-change="queryCurrentPage"
-              :total="total">
-            </el-pagination>
+            <el-col>
+              <el-pagination
+                v-if="total > 0"
+                :pager-count="6"
+                :current-page="currentPage"
+                hide-on-single-page
+                layout="prev, pager, next"
+                @current-change="queryCurrentPage"
+                :total="total">
+              </el-pagination>
+            </el-col>
           </el-row>
         </el-row>
       </el-main>
