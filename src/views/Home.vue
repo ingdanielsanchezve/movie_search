@@ -113,7 +113,7 @@ export default {
   methods: {
     getMovies () {
       if (this.term.length > 0) {
-        this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: this.term })
+        this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: this.term.trim() })
       }
     },
     queryCurrentPage (page) {
