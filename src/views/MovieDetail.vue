@@ -31,7 +31,7 @@
               </div>
             </div>
 
-              <p class="text-left" v-for="rating in movieDetails.Ratings" :key="rating.source">
+              <p class="text-left rating" v-for="rating in movieDetails.Ratings" :key="rating.source">
                   <strong>{{rating.Source}}</strong>: {{rating.Value}}
               </p>
 
@@ -79,6 +79,10 @@
                 <th>Country: </th>
                 <td>{{movieDetails.Country}}</td>
               </tr>
+              <tr>
+                <th>Awards: </th>
+                <td>{{movieDetails.Awards}}</td>
+              </tr>
             </table>
           </el-col>
 
@@ -88,7 +92,7 @@
 
       <el-footer>
         <div id="nav">
-          <a href="#" @click="goBack">Take me Back </a>
+          <a href="#" type="danger" @click="goBack"><i class="el-icon-d-arrow-left"></i> Take me Back </a>
         </div>
       </el-footer>
 

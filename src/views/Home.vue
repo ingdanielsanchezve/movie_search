@@ -13,7 +13,7 @@
           <el-col>
             <el-input placeholder="Please type to Search a Movie or TV show" v-model="term" @change="getMovies">
               <i slot="prefix" class="el-input__icon el-icon-search"></i>
-              <el-button type="primary" plain slot="append" @click="getMovies">Search</el-button>
+              <el-button type="danger" plain slot="append" @click="getMovies">Search</el-button>
             </el-input>
           </el-col>
         </el-row>
@@ -94,7 +94,9 @@ export default {
   },
   methods: {
     getMovies () {
-      this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: this.term })
+      if (this.term.length > 0) {
+        this.$store.dispatch(SEARCH_MOVIES_BY_TERM, { term: this.term })
+      }
     },
     queryCurrentPage (page) {
       this.$store.dispatch(SEARCH_MOVIES_BY_PAGE, { term: this.term, page: page })
@@ -103,11 +105,19 @@ export default {
 }
 </script>
 <style lang="scss">
-  .logo{
-    width: 200px;
-  }
   .el-row {
     margin-bottom: 20px;
+  }
+  .el-pagination__total{
+    color: white;
+    font-size: 14px;
+  }
+  .el-pagination .btn-prev, .el-pagination .btn-next, .el-pager li, .el-pagination button:disabled {
+    background: none;
+    color: white;
+  }
+  .el-pager li.active {
+    color: #e64749;
   }
   #result-stats {
     position: absolute;

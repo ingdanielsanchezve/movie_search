@@ -16,7 +16,7 @@
 
           <el-row :gutter="20">
             <el-col :xs="24" :sm="8" :md="6" :lg="4" :xl="3"
-                  v-for="fav in favorites" :key="fav.imdbID">
+                  v-for="(fav, index) in favorites" :key="`${fav.imdbID}${index}`">
               <Favorite :movieData="fav"></Favorite>
             </el-col>
           </el-row>
@@ -25,7 +25,7 @@
 
       <el-footer>
         <div id="nav">
-          <a href="#" @click="goBack">Take me Back </a>
+          <a href="#" type="danger" @click="goBack"> <i class="el-icon-d-arrow-left"></i> Take me Back </a>
         </div>
       </el-footer>
 
