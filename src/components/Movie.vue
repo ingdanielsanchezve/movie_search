@@ -65,13 +65,10 @@ export default {
 
 <style lang="scss">
 
-  img{
-    max-height: 300px;
-    width: auto;
-  }
-
   .poster{
     cursor: pointer;
+    height: 250px;
+    width: auto;
   }
 
   .card-text{

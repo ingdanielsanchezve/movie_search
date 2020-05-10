@@ -36,7 +36,8 @@
 
               <el-pagination
                 v-if="total > 0"
-                :pager-count="6"
+                small
+                :pager-count="pagerCount"
                 :current-page="currentPage"
                 hide-on-single-page
                 layout="prev, pager, next"
@@ -59,7 +60,8 @@
             <el-col>
               <el-pagination
                 v-if="total > 0"
-                :pager-count="6"
+                small
+                :pager-count="pagerCount"
                 :current-page="currentPage"
                 hide-on-single-page
                 layout="prev, pager, next"
@@ -90,7 +92,8 @@ export default {
   },
   data () {
     return {
-      term: this.$store.state.searchTerm
+      term: this.$store.state.searchTerm,
+      pagerCount: 7
     }
   },
   computed: {
