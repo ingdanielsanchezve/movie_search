@@ -116,7 +116,7 @@ export default {
     background: none;
     color: white;
   }
-  .el-pager li.active {
+  .el-pager li.active, .el-pager li:hover {
     color: #e64749;
   }
   #result-stats {

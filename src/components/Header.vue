@@ -11,6 +11,5 @@
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
   }
 </style>
