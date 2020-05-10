@@ -4,7 +4,7 @@
       <el-main>
 
         <el-row>
-          <el-col :offset="4" :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
+          <el-col :xs="{span: 16, offset: 4}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
             <h3 class="text-danger">
               {{movieDetails.Title}}
             </h3>
@@ -15,12 +15,12 @@
         </el-row>
 
         <el-row>
-          <el-col :offset="2" :xs="12" :sm="10" :md="8" :lg="4" :xl="4">
+          <el-col :xs="{span: 8, offset: 8}" :sm="{span: 8, offset: 8}" :md="{span: 8, offset: 8}" :lg="{span: 4, offset: 4}" :xl="{span: 4, offset: 4}">
             <div class="card mb-4 shadow-sm">
               <el-image :src="movieDetails.Poster" lazy>
-                <div slot="error" class="image-slot">
+                <!-- <div slot="error" class="image-slot">
                   <img src="../assets/no-poster-available.jpg" alt="Not Available">
-                </div>
+                </div> -->
               </el-image>
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -37,7 +37,7 @@
 
           </el-col>
 
-          <el-col :offset="1" :xs="15" :sm="10" :md="12" :lg="15" :xl="15">
+          <el-col :offset="1" :xs="{span: 8, offset: 10}" :sm="{span: 8, offset: 10}" :md="{span: 8, offset: 1}" :lg="15" :xl="15">
             <table class="table table-borderless">
               <tr>
                 <th>Year: </th>
