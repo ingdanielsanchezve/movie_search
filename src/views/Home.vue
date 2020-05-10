@@ -36,7 +36,6 @@
 
               <el-pagination
                 v-if="total > 0"
-                small
                 :pager-count="pagerCount"
                 :current-page="currentPage"
                 hide-on-single-page
@@ -60,7 +59,6 @@
             <el-col>
               <el-pagination
                 v-if="total > 0"
-                small
                 :pager-count="pagerCount"
                 :current-page="currentPage"
                 hide-on-single-page
