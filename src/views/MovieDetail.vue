@@ -37,7 +37,7 @@
 
           </el-col>
 
-          <el-col :offset="1" :xs="{span: 8, offset: 10}" :sm="{span: 8, offset: 10}" :md="{span: 8, offset: 1}" :lg="15" :xl="15">
+          <el-col :xs="{span: 8, offset: 6}" :sm="{span: 8, offset: 8}" :md="{span: 8, offset: 1}" :lg="15" :xl="15">
             <table class="table table-borderless">
               <tr>
                 <th>Year: </th>

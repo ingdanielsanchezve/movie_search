@@ -1,5 +1,4 @@
-// const fb = require('../firebaseConfig.js')
-import fb from '../firebaseConfig.js'
+const fb = require('../firebaseConfig.js')
 
 export default {
   getFavoritesMovies () {
