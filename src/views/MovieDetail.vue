@@ -15,7 +15,7 @@
         </el-row>
 
         <el-row>
-          <el-col :offset="4" :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
+          <el-col :offset="2" :xs="12" :sm="10" :md="8" :lg="4" :xl="4">
             <div class="card mb-4 shadow-sm">
               <el-image :src="movieDetails.Poster" lazy>
                 <div slot="error" class="image-slot">
@@ -37,7 +37,7 @@
 
           </el-col>
 
-          <el-col :offset="1" :xs="15" :sm="15" :md="15" :lg="15" :xl="15">
+          <el-col :offset="1" :xs="15" :sm="10" :md="12" :lg="15" :xl="15">
             <table class="table table-borderless">
               <tr>
                 <th>Year: </th>
