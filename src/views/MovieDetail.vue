@@ -14,7 +14,7 @@
         </el-row>
 
         <el-row v-else>
-          <el-col :xs="{span: 16, offset: 4}" :sm="{span: 16, offset: 4}" :md="{span: 16, offset: 4}" :lg="{span: 16, offset: 4}" :xl="{span: 16, offset: 4}">
+          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="{span: 16, offset: 4}">
             <h3 class="text-danger">
               {{movieDetails.Title}}
             </h3>
@@ -23,7 +23,7 @@
             </h6>
           </el-col>
 
-          <el-col :xs="{span: 8, offset: 8}" :sm="{span: 8, offset: 8}" :md="{span: 8, offset: 8}" :lg="{span: 4, offset: 4}" :xl="{span: 4, offset: 4}">
+          <el-col :xs="{span: 20, offset: 2}" :sm="8" :md="8" :lg="8" :xl="{span: 4, offset: 4}">
             <div class="card mb-4 shadow-sm">
               <el-image :src="(typeof movieDetails.Poster !== 'undefined') ? movieDetails.Poster : ''">
                 <div slot="error" class="image-slot">
@@ -45,7 +45,7 @@
 
           </el-col>
 
-          <el-col :xs="{span: 8, offset: 6}" :sm="{span: 8, offset: 8}" :md="{span: 8, offset: 1}" :lg="15" :xl="15">
+          <el-col :xs="24" :sm="{span: 15, offset: 1}" :md="{span: 15, offset: 1}" :lg="{span: 15, offset: 1}" :xl="{span: 15, offset: 1}">
             <table class="table table-borderless">
               <tr>
                 <th>Year: </th>
