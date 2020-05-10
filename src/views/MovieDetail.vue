@@ -1,5 +1,5 @@
 <template>
-    <el-container direction="vertical">
+    <el-container direction="vertical" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
       <Header></Header>
       <el-main>
 
@@ -17,10 +17,10 @@
         <el-row>
           <el-col :xs="{span: 8, offset: 8}" :sm="{span: 8, offset: 8}" :md="{span: 8, offset: 8}" :lg="{span: 4, offset: 4}" :xl="{span: 4, offset: 4}">
             <div class="card mb-4 shadow-sm">
-              <el-image :src="movieDetails.Poster" lazy>
-                <!-- <div slot="error" class="image-slot">
+              <el-image :src="(typeof movieDetails.Poster !== 'undefined') ? movieDetails.Poster : ''">
+                <div slot="error" class="image-slot">
                   <img src="../assets/no-poster-available.jpg" alt="Not Available">
-                </div> -->
+                </div>
               </el-image>
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -117,6 +117,9 @@ export default {
   computed: {
     favorites () {
       return this.$store.state.favorites
+    },
+    loading () {
+      return this.$store.state.loading
     },
     movieDetails () {
       return this.$store.state.movieDetails

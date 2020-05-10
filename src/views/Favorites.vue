@@ -1,5 +1,5 @@
 <template>
-    <el-container direction="vertical">
+    <el-container direction="vertical" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
       <Header></Header>
       <el-main>
           <h4>
@@ -47,6 +47,9 @@ export default {
   computed: {
     favorites () {
       return this.$store.state.favorites
+    },
+    loading () {
+      return this.$store.state.loading
     }
   },
   methods: {
